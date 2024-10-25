@@ -14,10 +14,10 @@ export class User {
   id: number;
 
   @Column()
-  firstName: string;
+  firstname: string;
 
   @Column()
-  lastName: string;
+  lastname: string;
 
   @Column({ unique: true })
   email: string;
@@ -29,18 +29,18 @@ export class User {
   address: string;
 
   @Column({ nullable: true })
-  kraPin: string;
+  krapin: string;
 
   @Column({ nullable: true })
   documentPath: string; // Path for attachments
 
-  @Column({
-    type: 'enum',
-    enum: RoleEnum,
-    array: true,
-    default: [RoleEnum.Engineer],
-  })
-  public roles: Role[];
+  // @Column({
+  //   type: 'enum',
+  //   enum: RoleEnum,
+  //   array: true,
+  //   default: [RoleEnum.Engineer],
+  // })
+  // public role: RoleEnum[];
 
   @CreateDateColumn()
   createdAt: Date;
@@ -51,5 +51,5 @@ export class User {
     joinColumn: { name: 'user_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'role_id', referencedColumnName: 'id' },
   })
-  myroles: Role[];
+  roles: Role[];
 }
