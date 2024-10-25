@@ -5,7 +5,10 @@ MYSQL_CONTAINER_NAME = bingwa-mysql
 MYSQL_IMAGE = mysql:9
 MYSQL_ROOT_PASSWORD = my-secret-pw
 MYSQL_PORT = 3306
-MYSQL_DATA_VOLUME = ./db:/var/lib/mysql/data
+MYSQL_DATA_VOLUME = ./db:/var/lib/mysql
+MYSQL_DATABASE = sahihi_builders
+MYSQL_USER = bingwa_user
+MYSQL_PASSWORD = user-password
 
 # run app development mode
 dev:
@@ -23,7 +26,11 @@ start-db:
 	fi
 	@echo "Starting a new MySQL container '$(MYSQL_CONTAINER_NAME)'..."
 	docker run --name $(MYSQL_CONTAINER_NAME) \
+		--rm \
 		-e MYSQL_ROOT_PASSWORD=$(MYSQL_ROOT_PASSWORD) \
+		-e MYSQL_DATABASE=$(MYSQL_DATABASE) \
+		-e MYSQL_USER=$(MYSQL_USER) \
+		-e MYSQL_PASSWORD=$(MYSQL_PASSWORD) \
 		-p $(MYSQL_PORT):3306 \
 		-v $(MYSQL_DATA_VOLUME) \
 		-d $(MYSQL_IMAGE)
