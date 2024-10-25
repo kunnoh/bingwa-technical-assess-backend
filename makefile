@@ -20,7 +20,8 @@ start-db:
 	@if docker ps -a --format '{{.Names}}' | grep -q '^$(MYSQL_CONTAINER_NAME)$$'; then \
 		echo "MySQL container '$(MYSQL_CONTAINER_NAME)' is running. Stopping and removing it..."; \
 		docker stop $(MYSQL_CONTAINER_NAME); \
-		docker rm $(MYSQL_CONTAINER_NAME); \
+		echo "Stopped $(MYSQL_CONTAINER_NAME) container...";\
+		# docker rm $(MYSQL_CONTAINER_NAME); \
 	else \
 		echo "MySQL container '$(MYSQL_CONTAINER_NAME)' is not running or does not exist."; \
 	fi
